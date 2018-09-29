@@ -70,5 +70,35 @@ namespace ListProductsEventId
                 Console.WriteLine(e);
             }
         }
+
+        public Dictionary<int, string> GetSpecifiedColumnAllCellValue(int sheetIndex, string columnTitle)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ExistValueOnSheet(string sheetName, string value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetSpecifiedCellValue(string sheetName, int columnIndex, int rowIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetCellValue(int sheetIndex, int columnIndex, int rowIndex, string value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<int, string> GetAllColumnTitle()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ExistSheet(string sheetName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
