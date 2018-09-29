@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ListProductsEventId.Tests;
+﻿using ListProductsEventId.Tests;
 
 namespace ListProductsEventId
 {
@@ -18,7 +13,12 @@ namespace ListProductsEventId
 
         public void GenerateColumnsViaSheetName()
         {
-
+            var workSheetNamesExceptFirst = excelHandler.GetWorkSheetNamesExceptFirst();
+            workSheetNamesExceptFirst.Reverse();
+            foreach (var sheetName in workSheetNamesExceptFirst)
+            {
+                excelHandler.CreateColumnAhead(sheetName);
+            }
         }
     }
 }

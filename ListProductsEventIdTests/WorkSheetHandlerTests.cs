@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
+using NSubstitute.Core.SequenceChecking;
 
 namespace ListProductsEventId.Tests
 {
@@ -16,8 +17,11 @@ namespace ListProductsEventId.Tests
 
             target.GenerateColumnsViaSheetName();
 
-            excelHandler.Received(1).CreateColumnAhead("AAA");
-            excelHandler.Received(1).CreateColumnAhead("BBB");
+            Received.InOrder(() =>
+            {
+                excelHandler.Received(1).CreateColumnAhead("BBB");
+                excelHandler.Received(1).CreateColumnAhead("AAA");
+            });
         }
     }
 }
