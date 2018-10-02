@@ -127,15 +127,24 @@ namespace ListProductsEventId
         {
             var findColumn = false;
             var columnIndex = 1;
-            while (worksheet.Cells[1, columnIndex] != null)
-            {
-                if ((worksheet.Cells[1, columnIndex] as Range).Value == columnTitle)
-                {
-                    findColumn = true;
-                    break;
-                }
 
-                columnIndex++;
+            try
+            {
+
+                while (worksheet.Cells[1, columnIndex] != null)
+                {
+                    if ((worksheet.Cells[1, columnIndex] as Range).Value == columnTitle)
+                    {
+                        findColumn = true;
+                        break;
+                    }
+
+                    columnIndex++;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
             }
 
             if (findColumn)
