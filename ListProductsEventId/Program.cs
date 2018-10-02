@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using System.Reflection;
 
-
 namespace ListProductsEventId
 {
     internal class Program
@@ -10,7 +9,7 @@ namespace ListProductsEventId
         private static void Main(string[] args)
         {
             Console.WriteLine("001 List Products Event Id v0.1");
-            Console.WriteLine("===========================================");
+            Console.WriteLine("============================================");
 
             var exePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string[] files = Directory.GetFiles(exePath, "批次分類表*.xlsx");
@@ -18,12 +17,16 @@ namespace ListProductsEventId
                 Console.WriteLine("找不到任何開頭檔名為「批次分類表」的 xlsx 檔。");
             else
             {
-                var filePath = Path.Combine(exePath, files[0]);
-                var workSheetHandler = new WorkSheetHandler(new XlsxHandler(filePath));
+                Console.WriteLine($"開始處理 '{Path.GetFileName(files[0])}'");
+                var workSheetHandler = new WorkSheetHandler(new XlsxHandler(files[0]));
                 workSheetHandler.GenerateColumnsViaSheetName();
+                Console.WriteLine("------");
+                var lookupIndexResult = workSheetHandler.LookupFromOtherSheetByProductId();
+                Console.WriteLine("------");
+                workSheetHandler.AddConcatenateAheadColumn(1, lookupIndexResult.MaxColumnIndex, lookupIndexResult.MaxRowIndex);
             }
 
-            Console.WriteLine("DONE");
+            Console.WriteLine("=================== 完成 ===================");
             Console.ReadKey();
         }
     }
