@@ -27,7 +27,7 @@ namespace ListProductsEventId
                 workSheetHandler.AddConcatenateAheadColumn(1, lookupIndexResult.MaxColumnIndex, lookupIndexResult.MaxRowIndex);
             }
 
-            Console.WriteLine("=================== 完成 ===================");
+            Console.WriteLine("============== 完成，請按任意鍵關閉視窗 ==============");
             Console.ReadKey();
         }
 
