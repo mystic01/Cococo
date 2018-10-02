@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
@@ -8,7 +9,7 @@ namespace ListProductsEventId
     {
         private static void Main(string[] args)
         {
-            Console.WriteLine("001 List Products Event Id v0.1");
+            Console.WriteLine($"001 List Products Event Id v{Version}");
             Console.WriteLine("============================================");
 
             var exePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -28,6 +29,16 @@ namespace ListProductsEventId
 
             Console.WriteLine("=================== งนฆจ ===================");
             Console.ReadKey();
+        }
+
+        public static string Version
+        {
+            get
+            {
+                Assembly asm = Assembly.GetExecutingAssembly();
+                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(asm.Location);
+                return String.Format("{0}.{1}", fvi.ProductMajorPart, fvi.ProductMinorPart);
+            }
         }
     }
 }
