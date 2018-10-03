@@ -45,8 +45,8 @@ namespace ListProductsEventId.Tests
 
             Received.InOrder(() =>
             {
-                excelHandler.Received(1).SetCellValue(1, 1, 2, "888,");
-                excelHandler.Received(1).SetCellValue(1, 2, 3, "999,");
+                excelHandler.Received(1).SetCellValue(1, 1, 2, ",888");
+                excelHandler.Received(1).SetCellValue(1, 2, 3, ",999");
             });
         }
 

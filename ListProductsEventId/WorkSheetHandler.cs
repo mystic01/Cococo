@@ -53,7 +53,7 @@ namespace ListProductsEventId
                     foreach (var intersectId in intersectIds)
                     {
                         var mappingRowIndex = productIds.FirstOrDefault(x => x.Value == intersectId).Key;
-                        excelHandler.SetCellValue(1, columnIndex, mappingRowIndex, groupId + ",");
+                        excelHandler.SetCellValue(1, columnIndex, mappingRowIndex, "," + groupId);
                     }
                 }
                 catch (Exception)
