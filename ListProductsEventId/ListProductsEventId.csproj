@@ -79,11 +79,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MaxIndexPair.cs" />
-    <Compile Include="XlsxHandler.cs" />
-    <Compile Include="IExcelHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorkSheetHandler.cs" />
+    <Compile Include="XlsxHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -152,6 +151,12 @@
       <IncludeHash>False</IncludeHash>
       <FileType>ManifestEntryPoint</FileType>
     </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{15502DFD-339A-41AF-AF70-6D4A2F58D021}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
