@@ -10,7 +10,7 @@ namespace ListProductsEventId
         private static void Main(string[] args)
         {
             Console.WriteLine($"001 List Products Event Id v{Version}");
-            Console.WriteLine("============================================");
+            Console.WriteLine("======================================================");
 
             var exePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string[] files = Directory.GetFiles(exePath, "批次分類表*.xlsx");

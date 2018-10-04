@@ -14,7 +14,7 @@ namespace GroupTenItems
         static void Main(string[] args)
         {
             Console.WriteLine($"002 Group Ten Items v{Version}");
-            Console.WriteLine("============================================");
+            Console.WriteLine("======================================================");
 
             var exePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string[] files = Directory.GetFiles(exePath, "MM整理*.xls");
