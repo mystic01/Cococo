@@ -19,6 +19,7 @@ namespace GroupTenItems.Tests
 
             excelHandler.GetSpecifiedCellValue(2, 3, 2).Returns("777");
             excelHandler.GetSpecifiedCellValue(2, 3, 3).Returns("888");
+            excelHandler.GetSpecifiedCellValue(2, 4, 2).Returns((string)null);
 
             var target = new WorkSheetHandler(excelHandler);
 
