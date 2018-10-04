@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Office.Interop.Excel;
-using Utility;
 
-namespace ListProductsEventId
+namespace Utility
 {
     public class ExcelBaseHandler : IExcelHandler
     {
