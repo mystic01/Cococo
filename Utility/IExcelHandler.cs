@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 
 namespace Utility
 {
@@ -16,6 +17,8 @@ namespace Utility
 
         string GetSpecifiedCellValue(int sheetIndex, int columnIndex, int rowIndex);
 
+        string GetSpecifiedCellValue(string sheetName, string columnTitle, int rowIndex);
+
         void SetCellValue(int sheetIndex, int columnIndex, int rowIndex, string value);
 
         Dictionary<int, string> GetAllColumnTitle(int sheetIndex);
@@ -27,5 +30,8 @@ namespace Utility
         void AddConcatenateAheadColumn(int sheetIndex, int columnIndex, int rowIndex);
 
         int AddWorksheet(string oriSheetName, string newSheetName);
+
+        string Name { get; }
+        void SetCellColor(int sheetIndex, int columnIndex, int rowIndex, Color backColor);
     }
 }

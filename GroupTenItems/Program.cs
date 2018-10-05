@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Utility;
 
 namespace GroupTenItems
 {
@@ -13,7 +13,7 @@ namespace GroupTenItems
     {
         static void Main(string[] args)
         {
-            Console.WriteLine($"002 Group Ten Items v{Version}");
+            Console.WriteLine($"002 Group Ten Items v{Utility.Utility.Version}");
             Console.WriteLine("======================================================");
 
             var exePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -29,16 +29,6 @@ namespace GroupTenItems
 
             Console.WriteLine("============== 完成，請按任意鍵關閉視窗 ==============");
             Console.ReadKey();
-        }
-
-        public static string Version
-        {
-            get
-            {
-                Assembly asm = Assembly.GetExecutingAssembly();
-                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(asm.Location);
-                return String.Format("{0}.{1}", fvi.ProductMajorPart, fvi.ProductMinorPart);
-            }
         }
     }
 }

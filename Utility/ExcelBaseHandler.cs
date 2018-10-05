@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using Microsoft.Office.Interop.Excel;
 
 namespace Utility
@@ -43,9 +44,10 @@ namespace Utility
             return result;
         }
 
-        public virtual string GetSpecifiedCellValue(string sheetName, int columnIndex, int rowIndex)
+        public string GetSpecifiedCellValue(string sheetName, int columnIndex, int rowIndex)
         {
-            throw new NotImplementedException();
+            var workSheet = FindWorkSheet(sheetName);
+            return (workSheet.Cells[rowIndex, columnIndex] as Range)?.Value?.ToString();
         }
 
         public string GetSpecifiedCellValue(int sheetIndex, int columnIndex, int rowIndex)
@@ -95,9 +97,37 @@ namespace Utility
         public virtual int AddWorksheet(string oriSheetName, string newSheetName)
         {
             var beforeSheet = FindWorkSheet(oriSheetName);
-            var newWorksheet = _xlWorkBook.Sheets.Add(After:beforeSheet) as Worksheet;
+            Worksheet newWorksheet;
+            if (beforeSheet != null)
+                newWorksheet = _xlWorkBook.Sheets.Add(After: beforeSheet) as Worksheet;
+            else
+                newWorksheet = _xlWorkBook.Sheets.Add() as Worksheet;
             newWorksheet.Name = newSheetName;
             return newWorksheet.Index;
+        }
+
+        public string Name
+        {
+            get { return _xlWorkBook.Name; }
+        }
+
+        public void SetCellColor(int sheetIndex, int columnIndex, int rowIndex, Color backColor)
+        {
+            var worksheet = _xlWorkBook.Sheets[sheetIndex] as Worksheet;
+            var cell = worksheet.Cells[rowIndex, columnIndex] as Range;
+            cell.Interior.Color = backColor;
+        }
+
+        public string GetSpecifiedCellValue(string sheetName, string columnTitle, int rowIndex)
+        {
+            var worksheet = FindWorkSheet(sheetName);
+            var columnIndex = FindColumnByTitle(columnTitle, worksheet);
+            if (columnIndex == null)
+            {
+                Console.WriteLine($"ERROR!! Can't find cell in GetSpecifiedCellValue(${sheetName}, ${columnTitle}, ${rowIndex})");
+                return string.Empty;
+            }
+            return GetSpecifiedCellValue(sheetName, columnIndex.Value, rowIndex);
         }
 
         private int? FindColumnByTitle(string columnTitle, Worksheet worksheet)
@@ -107,7 +137,6 @@ namespace Utility
 
             try
             {
-
                 while (worksheet.Cells[1, columnIndex] != null)
                 {
                     if ((worksheet.Cells[1, columnIndex] as Range).Value == columnTitle)

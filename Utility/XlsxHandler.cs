@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Office.Interop.Excel;
-using Utility;
 
-namespace ListProductsEventId
+namespace Utility
 {
-    internal class XlsxHandler : ExcelBaseHandler
+    public class XlsxHandler : ExcelBaseHandler
     {
         public XlsxHandler(string filePath)
         {
@@ -53,7 +52,7 @@ namespace ListProductsEventId
         public override void AddConcatenateAheadColumn(int sheetIndex, int columnIndex, int rowIndex)
         {
             Worksheet worksheet = _xlWorkBook.Sheets[sheetIndex];
-            Range insertRange = worksheet.Cells[1, columnIndex+1];
+            Range insertRange = worksheet.Cells[1, columnIndex + 1];
             insertRange.EntireColumn.Insert(XlInsertShiftDirection.xlShiftToRight);
 
             var formula = "=";
@@ -75,12 +74,6 @@ namespace ListProductsEventId
         {
             var worksheet = _xlWorkBook.Sheets[sheetIndex] as Worksheet;
             return SpecifiedColumnAllCellValue(columnTitle, worksheet);
-        }
-
-        public override string GetSpecifiedCellValue(string sheetName, int columnIndex, int rowIndex)
-        {
-            var workSheet = FindWorkSheet(sheetName);
-            return (workSheet.Cells[rowIndex, columnIndex] as Range)?.Value?.ToString();
         }
 
         public override Dictionary<int, string> GetAllColumnTitle(int sheetIndex)
