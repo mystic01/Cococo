@@ -16,15 +16,18 @@ namespace GroupTenItems
             var newSheetIndex = _excelHandler.AddWorksheet(oriSheetName, newSheetName);
             var pidLookup = _excelHandler.GetSpecifiedColumnAllCellValue(oriSheetName, "pid");
             var eventLookup = _excelHandler.GetSpecifiedColumnAllCellValue(oriSheetName, "活動名稱");
+            var rankLookup = _excelHandler.GetSpecifiedColumnAllCellValue(oriSheetName, "rank");
             var productNameLookup = _excelHandler.GetSpecifiedColumnAllCellValue(oriSheetName, "商品名稱");
 
             const int PRODUCT_COLUMNINDEX = 1;
-            const int EVENT_COLUMNINDEX = 2;
-            const int PID_COLUMNINDEX = 3;
-            const int PIDS_COLUMNINDEX = 4;
+            const int RANK_COLUMNINDEX = 2;
+            const int EVENT_COLUMNINDEX = 3;
+            const int PID_COLUMNINDEX = 4;
+            const int PIDS_COLUMNINDEX = 5;
 
             _excelHandler.CreateColumnAhead("pid");
             _excelHandler.CreateColumnAhead("活動名稱");
+            _excelHandler.CreateColumnAhead("rank");
             _excelHandler.CreateColumnAhead("商品名稱");
             _excelHandler.SetCellValue(newSheetIndex, PIDS_COLUMNINDEX, 1, "pids");
 
@@ -33,6 +36,7 @@ namespace GroupTenItems
             while (pidLookup.ContainsKey(rowIndex))
             {
                 _excelHandler.SetCellValue(newSheetIndex, PRODUCT_COLUMNINDEX, rowIndex, productNameLookup[rowIndex]);
+                _excelHandler.SetCellValue(newSheetIndex, RANK_COLUMNINDEX, rowIndex, rankLookup[rowIndex]);
                 _excelHandler.SetCellValue(newSheetIndex, EVENT_COLUMNINDEX, rowIndex, eventLookup[rowIndex]);
                 _excelHandler.SetCellValue(newSheetIndex, PID_COLUMNINDEX, rowIndex, pidLookup[rowIndex]);
                 rowIndex++;
@@ -42,8 +46,8 @@ namespace GroupTenItems
             for (int i = 2; i < rowIndex; i++)
             {
                 groupRowIndex++;
-                var currEventCell = _excelHandler.GetSpecifiedCellValue(newSheetIndex, 2, i);
-                var nextEventCell = _excelHandler.GetSpecifiedCellValue(newSheetIndex, 2, i + 1);
+                var currEventCell = _excelHandler.GetSpecifiedCellValue(newSheetIndex, EVENT_COLUMNINDEX, i);
+                var nextEventCell = _excelHandler.GetSpecifiedCellValue(newSheetIndex, EVENT_COLUMNINDEX, i + 1);
                 var sameGroup = currEventCell == nextEventCell;
 
                 if (sameGroup && groupRowIndex == 10)
